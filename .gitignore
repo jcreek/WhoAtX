@@ -38,3 +38,6 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
+
+# Database
+*.sqlite*
