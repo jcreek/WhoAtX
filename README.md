@@ -25,3 +25,9 @@ This is plugged in to an LLM (GPT) with search capability, so you can find the p
 
 - linking to calendars to make it clear if people are available or away
 - embedding into Jira to make it easy to assign the right people to the right tickets
+
+## Local development instructions
+
+1. Clone the repo
+2. Run `dotnet tool install --global dotnet-ef` to install the Entity Framework CLI if you haven't already
+3. Within the WhoAtX folder, run `dotnet ef migrations add InitialCreate` then `dotnet ef database update` to create the database
