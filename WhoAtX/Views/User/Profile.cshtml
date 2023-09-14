@@ -1,0 +1,61 @@
+@model UserProfileViewModel
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<div class="container">
+    <h1>User Profile</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Personal Information</h2>
+            <dl class="row">
+                <dt class="col-sm-4">Name:</dt>
+                <dd class="col-sm-8">@Model.Name</dd>
+
+                <dt class="col-sm-4">Pronouns:</dt>
+                <dd class="col-sm-8">@Model.Pronouns</dd>
+
+                <dt class="col-sm-4">Name Pronunciation:</dt>
+                <dd class="col-sm-8">
+                    @if (!string.IsNullOrEmpty(Model.NamePronunciationPath))
+                    {
+                        <audio controls>
+                            <source src="@Model.NamePronunciationPath" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    }
+                    else
+                    {
+                        <span>No pronunciation available</span>
+                    }
+                </dd>
+
+                <!-- Add more personal details here -->
+            </dl>
+        </div>
+
+        <div class="col-md-6">
+            <h2>Professional Information</h2>
+            <dl class="row">
+                <dt class="col-sm-4">Areas of Knowledge:</dt>
+                <dd class="col-sm-8">@Model.AreasOfKnowledge</dd>
+
+                <dt class="col-sm-4">Projects:</dt>
+                <dd class="col-sm-8">@Model.Projects</dd>
+
+                <dt class="col-sm-4">Team:</dt>
+                <dd class="col-sm-8">@Model.Team</dd>
+
+                <dt class="col-sm-4">Working Hours:</dt>
+                <dd class="col-sm-8">@Model.WorkingHours</dd>
+
+                <dt class="col-sm-4">Time Zone:</dt>
+                <dd class="col-sm-8">@Model.TimeZone</dd>
+
+                <!-- Add more professional details here -->
+            </dl>
+        </div>
+    </div>
+</div>
