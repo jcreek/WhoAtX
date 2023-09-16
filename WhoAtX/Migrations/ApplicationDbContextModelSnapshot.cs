@@ -31,7 +31,6 @@ namespace WhoAtX.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NamePronunciationPath")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Projects")

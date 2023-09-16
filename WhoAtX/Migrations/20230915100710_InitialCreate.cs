@@ -18,7 +18,7 @@ namespace WhoAtX.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Pronouns = table.Column<string>(type: "TEXT", nullable: false),
-                    NamePronunciationPath = table.Column<string>(type: "TEXT", nullable: false),
+                    NamePronunciationPath = table.Column<string>(type: "TEXT", nullable: true),
                     AreasOfKnowledge = table.Column<string>(type: "TEXT", nullable: false),
                     Projects = table.Column<string>(type: "TEXT", nullable: false),
                     Team = table.Column<string>(type: "TEXT", nullable: false),

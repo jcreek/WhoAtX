@@ -10,7 +10,7 @@ using WhoAtX.Data;
 namespace WhoAtX.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230914205826_InitialCreate")]
+    [Migration("20230915100710_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -34,7 +34,6 @@ namespace WhoAtX.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NamePronunciationPath")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Projects")
