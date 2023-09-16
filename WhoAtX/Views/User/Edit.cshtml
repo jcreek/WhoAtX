@@ -1,0 +1,63 @@
+@model UserProfileViewModel
+
+@{
+    ViewData["Title"] = "Edit User Profile";
+}
+
+<div class="container">
+    <h1>Edit User Profile</h1>
+
+    @using (Html.BeginForm("UpdateUserProfile", "User", FormMethod.Post))
+    {
+        <input type="text" hidden id="Id" name="Id" value="@Model.Id">
+        <!-- Name -->
+        <div class="form-group">
+            <label for="Name">Name:</label>
+            <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name">
+        </div>
+
+        <!-- Pronouns -->
+        <div class="form-group">
+            <label for="Pronouns">Pronouns:</label>
+            <input type="text" class="form-control" id="Pronouns" name="Pronouns" value="@Model.Pronouns">
+        </div>
+
+        @* <!-- Name Pronunciation Path --> *@
+        @* <div class="form-group"> *@
+        @*     <label for="NamePronunciationPath">Name Pronunciation Path:</label> *@
+        @*     <input type="text" class="form-control" id="NamePronunciationPath" name="NamePronunciationPath" value="@Model.NamePronunciationPath"> *@
+        @* </div> *@
+
+        <!-- Areas of Knowledge -->
+        <div class="form-group">
+            <label for="AreasOfKnowledge">Areas of Knowledge:</label>
+            <input type="text" class="form-control" id="AreasOfKnowledge" name="AreasOfKnowledge" value="@Model.AreasOfKnowledge">
+        </div>
+
+        <!-- Projects -->
+        <div class="form-group">
+            <label for="Projects">Projects:</label>
+            <input type="text" class="form-control" id="Projects" name="Projects" value="@Model.Projects">
+        </div>
+
+        <!-- Team -->
+        <div class="form-group">
+            <label for="Team">Team:</label>
+            <input type="text" class="form-control" id="Team" name="Team" value="@Model.Team">
+        </div>
+
+        <!-- Working Hours -->
+        <div class="form-group">
+            <label for="WorkingHours">Working Hours:</label>
+            <input type="text" class="form-control" id="WorkingHours" name="WorkingHours" value="@Model.WorkingHours">
+        </div>
+
+        <!-- Time Zone -->
+        <div class="form-group">
+            <label for="TimeZone">Time Zone:</label>
+            <input type="text" class="form-control" id="TimeZone" name="TimeZone" value="@Model.TimeZone">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+    }
+</div>

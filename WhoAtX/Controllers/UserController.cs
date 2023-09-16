@@ -13,10 +13,45 @@ namespace WhoAtX.Controllers
             _context = context;
         }
 
-        public IActionResult Profile()
+        private UserProfileViewModel MapUserProfileToViewModel(UserProfile userProfile)
         {
-            // Retrieve user profile data from the database
-            var userProfile = _context.UserProfiles.FirstOrDefault();
+            var userProfileViewModel = new UserProfileViewModel
+            {
+                Id = userProfile.Id,
+                Name = userProfile.Name,
+                Pronouns = userProfile.Pronouns,
+                NamePronunciationPath = userProfile.NamePronunciationPath,
+                AreasOfKnowledge = userProfile.AreasOfKnowledge,
+                Projects = userProfile.Projects,
+                Team = userProfile.Team,
+                WorkingHours = userProfile.WorkingHours,
+                TimeZone = userProfile.TimeZone,
+            };
+
+            return userProfileViewModel;
+        }
+        
+        private UserProfile MapViewModelToUserProfile(UserProfileViewModel userProfileViewModel)
+        {
+            var userProfile = new UserProfile
+            {
+                Id = userProfileViewModel.Id,
+                Name = userProfileViewModel.Name,
+                Pronouns = userProfileViewModel.Pronouns,
+                NamePronunciationPath = userProfileViewModel.NamePronunciationPath,
+                AreasOfKnowledge = userProfileViewModel.AreasOfKnowledge,
+                Projects = userProfileViewModel.Projects,
+                Team = userProfileViewModel.Team,
+                WorkingHours = userProfileViewModel.WorkingHours,
+                TimeZone = userProfileViewModel.TimeZone,
+            };
+
+            return userProfile;
+        }
+
+        public IActionResult Profile(int id)
+        {
+            var userProfile = _context.UserProfiles.Find(id);
 
             if (userProfile is null)
             {
@@ -39,21 +74,63 @@ namespace WhoAtX.Controllers
                 };
             }
 
-            // Map UserProfile to UserProfileViewModel
-            var userProfileViewModel = new UserProfileViewModel
-            {
-                Name = userProfile.Name,
-                Pronouns = userProfile.Pronouns,
-                NamePronunciationPath = userProfile.NamePronunciationPath,
-                AreasOfKnowledge = userProfile.AreasOfKnowledge,
-                Projects = userProfile.Projects,
-                Team = userProfile.Team,
-                WorkingHours = userProfile.WorkingHours,
-                TimeZone = userProfile.TimeZone,
-            };
+            var userProfileViewModel = MapUserProfileToViewModel(userProfile);
 
             // Pass the user profile data to the view
             return View(userProfileViewModel);
+        }
+        
+        public IActionResult New()
+        {
+            return View(new UserProfileViewModel());
+        }
+
+        [HttpPost]
+        public IActionResult CreateUserProfile(UserProfileViewModel userProfileViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var userProfile = MapViewModelToUserProfile(userProfileViewModel);
+
+                _context.UserProfiles.Add(userProfile);
+                _context.SaveChanges();
+
+                return RedirectToAction("Profile");
+            }
+
+            // If ModelState is not valid, return to the create page with validation errors
+            return View("New", userProfileViewModel);
+        }
+        
+        public IActionResult Edit(int id)
+        {
+            var userProfile = _context.UserProfiles.Find(id);
+
+            if (userProfile == null)
+            {
+                return NotFound();
+            }
+
+            var userProfileViewModel = MapUserProfileToViewModel(userProfile);
+
+            return View(userProfileViewModel);
+        }
+        
+        [HttpPost]
+        public IActionResult UpdateUserProfile(UserProfileViewModel userProfileViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var userProfile = MapViewModelToUserProfile(userProfileViewModel);
+
+                _context.UserProfiles.Update(userProfile);
+                _context.SaveChanges();
+
+                return RedirectToAction("Profile");
+            }
+
+            // If ModelState is not valid, return to the edit page with validation errors
+            return View("Edit", userProfileViewModel);
         }
     }
 }
